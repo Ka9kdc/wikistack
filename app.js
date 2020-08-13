@@ -1,8 +1,13 @@
 const express = require("express");
 const morgan = require("morgan");
 const layout = require("./views/layout.js");
+const { db } = require('./models')
 
 const app = new express();
+db.authenticate()
+  .then(() => {
+    console.log('connected to the database');
+  })
 
 app.use(express.static("public"));
 
@@ -16,6 +21,10 @@ app.use("/", (req, res) => {
 app.get("/", (req, res) => {
   res.send("hello world!");
 });
+
+(async () => {
+  
+}
 
 app.listen(1432, () => {
   console.log("up and running on port 1432");
