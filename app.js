@@ -1,7 +1,7 @@
 const express = require("express");
 const morgan = require("morgan");
 const layout = require("./views/layout.js");
-const { db } = require('./models')
+const { db, Page, User} = require('./models')
 
 const app = new express();
 db.authenticate()
@@ -22,10 +22,13 @@ app.get("/", (req, res) => {
   res.send("hello world!");
 });
 
-(async () => {
+const init = async () => {
+  await Page.sync();
+  await User.sync();
   
+  app.listen(1432, () => {
+    console.log("up and running on port 1432");
+  });
 }
 
-app.listen(1432, () => {
-  console.log("up and running on port 1432");
-});
+init();
