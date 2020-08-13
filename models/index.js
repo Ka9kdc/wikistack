@@ -39,6 +39,8 @@ const Page = db.define("page", {
   },
 });
 
+// Page.beforeValidation()
+
 module.exports = {
   db,
   User,
